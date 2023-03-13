@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { Button, Form, FormLabel } from 'react-bootstrap';
+import React, { useRef, useState } from 'react'
+import { FormLabel } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom'
 
 
@@ -43,44 +43,44 @@ export default function PercentagesPage() {
       }
   return (
     <body>
-            <div className="centerdiv">
-                <h2>Wpisz procentowy udział każdego z gatunków w ekosystemie leśnym. Suma nie może być mniejsza niż 60%</h2>
-                <Form className='next'>
-                <div className='column'>
-                {choiceList[3].map((element, index) => {
-                  if(element !== 'brak') {
-                    return (
-                      <div >
-                          <FormLabel>{element}</FormLabel>
-                          <input
-                              type="number"
-                              index={index}
-                              onInput={event => handleInputs(event, index)}
-                              ref={inputRef}
-                              />
-                      </div>             
-                    )
-                  }
-                } )}
-                </div>
-            </Form>
-            <div className='forlink'>
-            <Link className='endlink' to={{
-                            pathname: '/dominant',
-                            state: {
-                                state: choiceList.slice(0, -1)
-                            }
-                        }}>Wróć</Link>
-            <Link onClick={checkCorrectValues} className='link'  to={{
-                        pathname: '/howmanytrees',
-                        state: {
-                            state: choiceList,
-                        }
-                    }}>Dalej</Link>
+        <div className="centerdiv">
+            <h2>Wpisz procentowy udział każdego z gatunków w ekosystemie leśnym. Suma nie może być mniejsza niż 60%</h2>
+            <form className='next'>
+            <div className='column'>
+            {choiceList[3].map((element, index) => {
+              if(element !== 'brak') {
+                return (
+                  <div >
+                      <FormLabel>{element}</FormLabel>
+                      <input
+                          type="number"
+                          index={index}
+                          onInput={event => handleInputs(event, index)}
+                          ref={inputRef}
+                          />
+                  </div>             
+                )
+              }
+            } )}
+            </div>
+        </form>
 
-            </div>
-            
-            </div>
-        </body>
+        <div className='forlink'>
+        <Link className='endlink' to={{
+                        pathname: '/dominant',
+                        state: {
+                            state: choiceList.slice(0, -1)
+                        }
+                    }}>Wróć</Link>
+        <Link onClick={checkCorrectValues} className='link'  to={{
+                    pathname: '/howmanytrees',
+                    state: {
+                        state: choiceList,
+                    }
+                }}>Dalej</Link>
+        </div>
+        
+        </div>
+    </body>
   )
 }

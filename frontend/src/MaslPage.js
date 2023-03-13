@@ -15,7 +15,6 @@ export default function MaslPage() {
     ]
     const [description, setDescription] = useState("")
 
-
     function handleChange(event){
         setSelected(true)
         if(choiceList[0].tag === 'mature') {
@@ -79,8 +78,8 @@ export default function MaslPage() {
                         </div>
                     ))}
                     <div>{description}</div>
-                    
                 </form>
+                
                 <div className='forlink'>
                 <Link className='endlink' to={{
                             pathname: '/reservoir',
@@ -94,7 +93,6 @@ export default function MaslPage() {
                             state: choiceList
                         }
                     }}>Dalej</Link>
-
                 </div>
                 
             </div>

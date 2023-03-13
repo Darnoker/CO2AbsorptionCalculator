@@ -44,7 +44,6 @@ export default function SoilMoisturePage() {
         setChoiceList(newList)
     }
 
-
     function goToAnotherPage(event) {
         if(!isSelected) {
             alert("Nie została wybrana żadna opcja!")
@@ -73,8 +72,9 @@ export default function SoilMoisturePage() {
                             </label>
                         </div>
                     ))}
-
-                    <div className='forlink'>
+                </form>
+                
+                <div className='forlink'>
                     {choiceList[0].tag ==='mature' ? (
                         <Link className='endlink' to={{
                             pathname: '/degree',
@@ -98,10 +98,8 @@ export default function SoilMoisturePage() {
                             state: choiceList
                         }
                     }}>Dalej</Link>
-
                     </div>
                     
-                </form>
             </div>
         </body>
     )

@@ -16,7 +16,6 @@ export default function HowManyTreesPage() {
             choiceList.pop()
         }
 
-
         const newList = choiceList.concat({value:event.target.value})
         setChoiceList(newList)
     }
@@ -49,7 +48,6 @@ export default function HowManyTreesPage() {
                             </label>
                         </div>
                     ))}
-                   
                 </form>
 
                 <div className='forlink'>

@@ -10,16 +10,13 @@ export default function GroundTypePage() {
     const inputRef = useRef()
     const habitatTypes = ["po wyrębie", "porolna", "łąka"]
         
-    
-
     function handleChange(event){
         setSelected(true)
         if(choiceList.length === 3) {
             choiceList.pop()
         }
+
         var choice;
-
-
         switch(event.target.value){
             case 'po wyrębie':
                 choice = {tag: 'after felling', value: event.target.value}
@@ -42,6 +39,7 @@ export default function GroundTypePage() {
             event.preventDefault()
         }
     }
+
     return (
         <body>
             <div className="centerdiv">
@@ -63,7 +61,6 @@ export default function GroundTypePage() {
                             </label>
                         </div>
                     ))}
-                    
                 </form>
 
                 <div className='forlink'>
@@ -79,9 +76,7 @@ export default function GroundTypePage() {
                             state: choiceList
                         }
                     }}>Dalej</Link>
-
                 </div>
-
                 
             </div>
         </body>

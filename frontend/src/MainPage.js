@@ -43,8 +43,6 @@ export default function MainPage() {
                         }}>Dalej</Link>
                 </div>
                 
-
-        
             </div>
         </body>
     )

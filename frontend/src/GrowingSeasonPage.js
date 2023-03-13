@@ -61,7 +61,6 @@ export default function GrowingSeasonPage() {
                             </label>
                         </div>
                     ))}
-                    
                 </form>
 
                 <div className='forlink'>
@@ -77,10 +76,8 @@ export default function GrowingSeasonPage() {
                             state: choiceList
                         }
                     }}>Oblicz</Link>
-
                 </div>
 
-                
             </div>
         </body>
     )

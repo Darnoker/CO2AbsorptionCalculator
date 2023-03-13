@@ -61,8 +61,9 @@ export default function HabitatPage() {
                             </label>
                         </div>
                     ))}
+                </form>
 
-                    <div className='forlink'>
+                <div className='forlink'>
                     <Link className='endlink' to={{
                             pathname: '/averageAge',
                             state: {
@@ -76,7 +77,7 @@ export default function HabitatPage() {
                         }
                     }}>Dalej</Link>
                     </div>
-                </form>
+                    
             </div>
         </body>
     )
