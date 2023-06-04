@@ -12,16 +12,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/habitat")
 @CrossOrigin
-public class HabitatTypeController {
-
-    private HabitatTypeService habitatTypeService;
+public class HabitatTypeController extends MongoController<HabitatType> {
 
     public HabitatTypeController(HabitatTypeService habitatTypeService) {
-        this.habitatTypeService = habitatTypeService;
-    }
-
-    @GetMapping("/all")
-    public List<HabitatType> getAll() {
-        return habitatTypeService.getAll();
+        super(habitatTypeService);
     }
 }

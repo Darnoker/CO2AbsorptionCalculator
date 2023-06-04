@@ -1,10 +1,22 @@
 package com.co2absorptioncalculator.co2absorptioncalculator.service;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+
 import java.util.List;
 
-public interface MongoService<T> {
+public abstract class MongoService<T> {
 
-    public T save(T object);
+    private MongoRepository<T, String> repository;
 
-    public List<T> getAll();
+    public MongoService(MongoRepository<T, String> repository) {
+        this.repository = repository;
+    }
+
+    public T save(T document) {
+        return repository.save(document);
+    }
+
+    public List<T> getAll() {
+        return repository.findAll();
+    }
 }
