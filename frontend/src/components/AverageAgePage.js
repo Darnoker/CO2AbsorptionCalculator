@@ -88,7 +88,6 @@ export default function AverageAgePage() {
                             state: choiceList
                         }
                     }}>Dalej</Link>
-
                 </div>
                 
             </div>

@@ -60,8 +60,8 @@ export default function DominantSpeciesPage() {
     }
     
     function addToChoiceList(newList) {
-        const lele = choiceList.push(newList)
-        setChoiceList(lele)
+        const newChoiceList = choiceList.push(newList)
+        setChoiceList(newChoiceList)
       }
       
       function goToAnotherPage(event) {
