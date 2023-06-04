@@ -1,21 +1,42 @@
 import React, { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import './css/page.css'
 
 
-export default function AverageAgePage() {
+export function getGroundTypeChoice(value) {
+    let tag = ''
+    switch(value) {
+        case 'po wyrębie':
+            tag = 'after felling'
+            break
+        case 'porolna':
+            tag = 'post-agricultural'
+            break
+        case 'łąka':
+            tag = 'meadow'
+            break
+    }
+
+    return {tag: tag, value: value}
+}
+
+export default function GroundTypePage() {
     const location = useLocation()
     const [choiceList, setChoiceList] = useState(location.state.state.concat(0))
-    const [isSelected, setSelected] = useState(false)
+    const [isSelected, setSelected] = useState(false)  
     const inputRef = useRef()
-    const ageGroups = ["30-50", "51-70", "71-90", "91-110", "111-130"]
+    const habitatTypes = ["po wyrębie", "porolna", "łąka"]
+        
+    
 
     function handleChange(event){
         setSelected(true)
         if(choiceList.length === 3) {
             choiceList.pop()
         }
-        const newList = choiceList.concat({value: event.target.value})
+        
+        const value = event.target.value
+        const choice = getGroundTypeChoice(value)
+        const newList = choiceList.concat(choice)
         setChoiceList(newList)
     }
 
@@ -25,17 +46,16 @@ export default function AverageAgePage() {
             event.preventDefault()
         }
     }
-
     return (
         <body>
-            <div className="centerdiv">
-                <h2>Średni wiek lasu:</h2>
+            <div className="centerdiv fade-in">
+                <h2>Rodzaj podłoża:</h2>
                 <form>
-                    {ageGroups.map(element => (
+                    {habitatTypes.map(element => (
                         <div>
                             <label>
                                 <input
-                                className='radio' 
+                                className='radio'  
                                 ref={inputRef}
                                 name="radiobutton"
                                 type="radio"
@@ -47,8 +67,9 @@ export default function AverageAgePage() {
                             </label>
                         </div>
                     ))}
-                  
+                    
                 </form>
+
                 <div className='forlink'>
                 <Link className='endlink' to={{
                             pathname: '/area',
@@ -57,12 +78,14 @@ export default function AverageAgePage() {
                             }
                         }}>Wróć</Link>
                 <Link onClick={goToAnotherPage} className='link' to={{
-                        pathname: '/habitat',
+                        pathname: '/dominant',
                         state: {
                             state: choiceList
                         }
                     }}>Dalej</Link>
+
                 </div>
+
                 
             </div>
         </body>

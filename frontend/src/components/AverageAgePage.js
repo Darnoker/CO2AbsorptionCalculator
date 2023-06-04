@@ -1,35 +1,39 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import '../css/page.css'
+import axios from 'axios'
 
+export function getChoiceValue(value) {
+    return {value: value}
+}
 
-export default function GroundTypePage() {
+export default function AverageAgePage() {
     const location = useLocation()
     const [choiceList, setChoiceList] = useState(location.state.state.concat(0))
-    const [isSelected, setSelected] = useState(false)  
-    // const [selectedOptions, setSelectedOptions] = useState([]);
+    const [isSelected, setSelected] = useState(false)
     const inputRef = useRef()
-    const habitatTypes = ["po wyrębie", "porolna", "łąka"]
-        
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    
+
+    useEffect(() => {
+        axios
+          .get('http://localhost:8080/api/averageAge/all')
+          .then(response => {
+            setData(response.data);
+            setLoading(false);
+          })  
+          .catch(error => console.log(error));
+      });
+
     function handleChange(event){
         setSelected(true)
         if(choiceList.length === 3) {
             choiceList.pop()
         }
-
-        var choice;
-        switch(event.target.value){
-            case 'po wyrębie':
-                choice = {tag: 'after felling', value: event.target.value}
-                break
-            case 'porolna':
-                choice = {tag : 'post-agricultural', value: event.target.value}
-                break
-            case 'łąka':
-                choice = {tag : 'meadow', value: event.target.value}
-                break
-        }
-
-        const newList = choiceList.concat(choice)
+        const value = event.target.value
+        const newList = choiceList.concat(getChoiceValue(value))
         setChoiceList(newList)
     }
 
@@ -40,29 +44,37 @@ export default function GroundTypePage() {
         }
     }
 
+    if (loading) {
+        return (
+          <center>
+            <h1>Loading....</h1>
+          </center>
+        )
+      }
+
     return (
         <body>
-            <div className="centerdiv">
-                <h2>Rodzaj podłoża:</h2>
+            <div className="centerdiv fade-in">
+                <h2>Średni wiek lasu:</h2>
                 <form>
-                    {habitatTypes.map(element => (
+                    {data && data.map(element => (
                         <div>
                             <label>
                                 <input
-                                className='radio'  
+                                className='radio' 
                                 ref={inputRef}
                                 name="radiobutton"
                                 type="radio"
-                                key={element} 
-                                value={element}
+                                key={element.ageInterval} 
+                                value={element.ageInterval}
                                 onClick={(event) => handleChange(event)} 
                                 />
-                                {element}
+                                {element.ageInterval}
                             </label>
                         </div>
                     ))}
+                  
                 </form>
-
                 <div className='forlink'>
                 <Link className='endlink' to={{
                             pathname: '/area',
@@ -71,7 +83,7 @@ export default function GroundTypePage() {
                             }
                         }}>Wróć</Link>
                 <Link onClick={goToAnotherPage} className='link' to={{
-                        pathname: '/dominant',
+                        pathname: '/habitat',
                         state: {
                             state: choiceList
                         }

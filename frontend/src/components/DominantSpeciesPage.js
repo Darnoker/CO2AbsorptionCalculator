@@ -1,41 +1,54 @@
-import React, { useRef, useState } from 'react'
+import axios from 'axios';
+import React, { useEffect, useRef, useState } from 'react'
 import { Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom'
 
-export default function DominantSpecies() {
+export default function DominantSpeciesPage() {
 
     const location = useLocation()
     const [choiceList, setChoiceList] = useState(location.state.state)
     const [selected, setSelected] = useState(false)
     const [selectedOptions, setSelectedOptions] = useState([]);
     const inputRef = useRef()
-    const treeTypes = [
-        "dąb szypułkowy i bezszypułkowy (Quercus robus Q. petraea)",
-        "grab pospolity (Carpinus betulus)",
-        "buk pospolity (Fagus sylvatica)",
-        "lipa drobnolistna (Tilia cordata)",
-        "jesion wyniosły (Fraxinus excelsior)",
-        "klon pospolity (Acer platanoides)",
-        "klon jawor (Acer pseudoplatanus)",
-        "klon polny (Acer campestre)",
-        "gatunki uzupełniające i krzewy"
-    ]
+
+
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    
+
+    useEffect(() => {
+        axios
+          .get('http://localhost:8080/api/dominantSpecies/all')
+          .then(response => {
+            setData(response.data);
+            setLoading(false);
+          })  
+          .catch(error => console.log(error));
+      });    function handleChange(event){
+        setSelected(true)
+        if(choiceList.length === 3) {
+            choiceList.pop()
+        }
+        const newList = choiceList.concat({value: event.target.value})
+        setChoiceList(newList)
+    }
 
     function handleChange(event){
-            const { value } = event.target;
+        const { value } = event.target;
 
-            let newList;
-            if(selectedOptions.includes(value)) {
-                newList = selectedOptions.filter(v => v !== value)
-                setSelectedOptions(newList)
-            } else {
-                if(selectedOptions.length >= 3) {
-                    return
-                }
-                newList = [...selectedOptions, value]
-                setSelectedOptions(newList)
+        let newList;
+        if(selectedOptions.includes(value)) {
+            newList = selectedOptions.filter(v => v !== value)
+            setSelectedOptions(newList)
+        } else {
+            if(selectedOptions.length >= 3) {
+                return
             }
-            checkSelected(newList)
+            newList = [...selectedOptions, value]
+            setSelectedOptions(newList)
+        }
+        checkSelected(newList)
     }
 
     function checkSelected(newList) {
@@ -75,23 +88,23 @@ export default function DominantSpecies() {
     return (
         <body>
             {checkSelected}
-            <div className="centerdiv">
+            <div className="centerdiv fade-in">
                 <h2>Wybierz max. 3 gatunki</h2>
                 <form>
-                    {treeTypes.map((element, index) => (
+                    {data && data.map((element, index) => (
                         <div>
                             <label>
                                 <input
                                 className='radio'  
                                 ref={inputRef}
-                                name={element}
+                                name={element.species}
                                 type="checkbox"
                                 key={index}
-                                value={element} 
-                                checked={selectedOptions.includes(element)}
+                                value={element.species} 
+                                checked={selectedOptions.includes(element.species)}
                                 onChange={(event) => handleChange(event)}
                                 />
-                                {element}
+                                {element.species}
                             </label>
                         </div>
                     ))}
