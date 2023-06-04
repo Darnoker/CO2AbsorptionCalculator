@@ -85,6 +85,7 @@ public class FactorCalculator {
             case "lipa drobnolistna (Tilia cordata)", "klon pospolity (Acer platanoides)" -> 2d;
             case "jesion wyniosły (Fraxinus excelsior)", "gatunki uzupełniające i krzewy" -> 1.8;
             case "klon jawor (Acer pseudoplatanus)", "klon polny (Acer campestre)" -> 1.9;
+            case "brak" -> 0.0;
             default -> throw new IncorrectDataException("Invalid data" + dominantSpecies);
         };
     }
