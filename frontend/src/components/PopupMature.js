@@ -7,14 +7,11 @@ import { getDegreeChoice } from './DegreePage';
 import { getSoilMoistureChoice } from './SoilMoisturePage';
 import { getWaterReservoirChoice } from './WaterReservoirPage';
 import { getMaslChoice } from './MaslPage';
-
-
+import { Button } from 'react-bootstrap';
 
 export default function PopupMature({index, list, inputRef, onListUpate, onPopupIndexUpdate}) {
-    console.log('rendered ' + index)
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
     useEffect(() => {
         switch(index) {
@@ -107,13 +104,12 @@ export default function PopupMature({index, list, inputRef, onListUpate, onPopup
 
                 )}
                 
-                <button onClick={() => handleClosePopup(index)}>Close Popup</button>
+                <Button  onClick={() => handleClosePopup(index)}>Zamknij okno</Button>
             </div>
         );
     }
 
     function modifyChoiceList(index) {
-        console.log('Inside modifyChoiceList')
         const value = inputRef.current.value
         let choice
         switch(index) {

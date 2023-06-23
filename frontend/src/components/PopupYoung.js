@@ -5,10 +5,10 @@ import { getFormattedValue, getFormattedValueNoObject } from './AreaPage';
 import { getChoiceValue } from './AverageAgePage';
 import { getSoilMoistureChoice } from './SoilMoisturePage';
 import { getMaslChoice } from './MaslPage';
+import { Button } from 'react-bootstrap';
 
 export default function PopupYoung({index, list, inputRef, onListUpate, onPopupIndexUpdate}) {
 
-    console.log('rendered ' + index)
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -96,15 +96,13 @@ export default function PopupYoung({index, list, inputRef, onListUpate, onPopupI
 
                 )}
                 
-                <button onClick={() => handleClosePopup(index)}>Close Popup</button>
+                <Button onClick={() => handleClosePopup(index)}>Close Popup</Button>
             </div>
         );
     }
 
     function modifyChoiceList(index) {
-        console.log('Inside modifyChoiceList')
         const value = inputRef.current.value
-        console.log(options)
         let choice
         switch(index) {
             case 0:
@@ -151,7 +149,6 @@ export default function PopupYoung({index, list, inputRef, onListUpate, onPopupI
             updatedList[index] = choice
 
         }
-        console.log(updatedList)
         onListUpate(updatedList)
       }
     

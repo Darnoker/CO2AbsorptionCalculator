@@ -14,13 +14,15 @@ import java.util.Locale;
 public class CalculateService {
 
     private final static int DIVISOR = 10000;
-    private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.US));
+    private final static DecimalFormat DECIMAL_FORMAT = new DecimalFormat(
+        "#.##", 
+        DecimalFormatSymbols.getInstance(Locale.US)
+        );
 
     public CalculateService() {
         DECIMAL_FORMAT.setRoundingMode(RoundingMode.HALF_UP);
     }
 
-// reservoir is still used as a parameter, because of probability of future usage, currently it is  unknown how it can influence result.
     public Double calculateMature(
             Double area,
             String age,
@@ -66,7 +68,6 @@ public class CalculateService {
             Double e = FactorCalculator.getTypeOfGroundValue(groundType);
             Double g = FactorCalculator.getNumberOfTreesValue(treeNumber);
             final Double  AS = 98.9;
-
             switch (dominantSpecies.size()) {
                 case 1 -> {
                     Double f1 = FactorCalculator.getDominantSpeciesValue(dominantSpecies.get(0));

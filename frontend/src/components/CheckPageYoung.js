@@ -32,7 +32,7 @@ export default function CheckPageYoung() {
     ]
 
     const buttonsYoung = Array.from({ length: 11 }, (_, i) => (
-        <Button type='button' className='somebutton' key={i} onClick={() => handleButtonClick(i)}>Edytuj</Button>
+        <Button type='button' className='buttonstyle' key={i} onClick={() => handleButtonClick(i)}>Edytuj</Button>
       ));
 
 

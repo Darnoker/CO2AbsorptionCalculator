@@ -28,11 +28,8 @@ export default function CheckPageMature() {
         'Lokacja', 
     ]
 
-
-    console.log(choiceList)
-
     const buttonsMature = Array.from({ length: 9 }, (_, i) => (
-        <Button type='button' className='somebutton' key={i} onClick={() => handleButtonClick(i)}>Edytuj</Button>
+        <Button type='button' className='buttonstyle' key={i} onClick={() => handleButtonClick(i)}>Edytuj</Button>
       ));
 
 
@@ -125,11 +122,7 @@ export default function CheckPageMature() {
                         <Button className='link' ref={buttonRef} onClick={callApi}>Oblicz</Button>
 
                     </div>
-
-                    
                     <Link className='endlink' to={{ pathname: '/' }}>Wróć do początku</Link>
-
-
                     <div className='result'>
 
                         <label>Wynik: &nbsp;</label>

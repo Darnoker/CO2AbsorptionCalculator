@@ -161,14 +161,13 @@ body {
     flex-direction: row;
 }
 
-.somebutton {
+.buttonstyle {
     width: 69px;
     height: 40px;
     margin-left: 5px;
     text-align: center;
 
 }
-
 
 input[type]{
     margin-right: 10px;

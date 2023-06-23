@@ -45,8 +45,6 @@ export default function DegreePage() {
             choiceList.pop()
         }
         let choice = {percentage: percentage, value: name}
-        console.log(choice)
-
         const newList = choiceList.concat(choice)
         setChoiceList(newList)
     }

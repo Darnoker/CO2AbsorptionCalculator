@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 export default function PopupPercentage({index, list, inputRef, onListUpate, onPopupIndexUpdate}) {
 
-    console.log('rendered ' + index)
     const [selectedOptions, setSelectedOptions] = useState(Array(list[4].length).fill(0));
     const filteredArray = list[3].filter(element => element !== 'brak')
 
@@ -49,7 +48,6 @@ export default function PopupPercentage({index, list, inputRef, onListUpate, onP
         const updatedList = [...list]
 
         updatedList[4] = selectedOptions;
-        console.log(updatedList)
         onListUpate(updatedList)
       }
     
